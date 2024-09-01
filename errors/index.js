@@ -1,8 +1,9 @@
 import { devErrors, prodErrors } from "./environment.js";
+import { duplicateKeyErrorHandler } from "./database.js";
 
 const globalErrorHandler = (error, req, res, next) => {
   error.statusCode = error.statusCode || 500;
-  error.satus = error.status || "error";
+  error.status = error.status || "error";
 
   console.log("Entering globalErrorHandler");
   console.log("Environment:", process.env.NODE_ENV);
@@ -11,6 +12,7 @@ const globalErrorHandler = (error, req, res, next) => {
   if (process.env.NODE_ENV === "development") {
     devErrors(res, error);
   } else if (process.env.NODE_ENV === "production") {
+    if (error.code === 11000) error = duplicateKeyErrorHandler(error);
     prodErrors(res, error);
   }
 };

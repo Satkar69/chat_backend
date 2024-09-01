@@ -8,12 +8,12 @@ const userSchema = new Schema({
   username: {
     type: String,
     required: [true, "username is a required field"],
-    unique: [true, "username already in use, enter a new one"],
+    unique: [true, "username already exists, enter a new username"],
   },
   password: {
     type: String,
     required: [true, "password is a required field"],
-    minlength: 6,
+    minlength: [6, "password must be of at least 6 characters"],
   },
   gender: {
     type: String,

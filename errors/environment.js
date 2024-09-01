@@ -10,7 +10,6 @@ export const devErrors = (res, error) => {
 export const prodErrors = (res, error) => {
   if (error.isOperational) {
     res.status(error.statusCode).json({
-      status: error.status,
       statusCode: error.statusCode,
       message: error.message,
     });
