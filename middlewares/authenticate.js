@@ -17,11 +17,9 @@ export const authenticate = asynchandler(async (req, res, next) => {
   }
 
   try {
-    const decoded_data = decodeToken(token);
-    const user_id = decoded_data.user_id;
-    const user = await CHATDB.User.findone({ id: user_id }).select(
-      "-password -__V"
-    );
+    const decoded = await decodeToken(token);
+    const userId = decoded.userId;
+    const user = await CHATDB.User.findById(userId).select("-password -__V");
 
     if (!user) {
       const error = new CustomError("User not found", 404);

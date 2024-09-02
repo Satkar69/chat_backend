@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js"
+    "start": "nodemon --env-file=.env ./server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "socket.io": "^4.7.5"
   },
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "nodemon": "^3.1.4"
   },
   "type": "module"

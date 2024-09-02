@@ -23,7 +23,7 @@ export const loginUser = async ({ username, password }) => {
     const error = new CustomError("Password did not match", 401);
     throw error;
   }
-  const token = await generateToken({ id: user._id });
+  const token = await generateToken({ userId: user._id });
   return token;
 };
 
