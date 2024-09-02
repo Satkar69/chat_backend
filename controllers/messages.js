@@ -13,6 +13,9 @@ export const sendMessage = asynchandler(async (req, res, next) => {
   if (conversation && newMessage) {
     conversation.messages.push(newMessage._id);
   }
+
+  // socket.io functionality will go here
+
   await conversation.save();
   res.status(201).json({
     status: "success",
