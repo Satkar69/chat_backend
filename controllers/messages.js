@@ -6,8 +6,10 @@ export const sendMessage = asynchandler(async (req, res, next) => {
   const { id: recieverId } = req.params;
   const { message } = req.body;
   const senderId = req.user._id;
-  const conversation = await getConvByUsers(senderId, recieverId);
-  const newMessage = await createMessage(senderId, recieverId, message);
+  const [conversation, newMessage] = await Promise.all([
+    await getConvByUsers(senderId, recieverId),
+    await createMessage(senderId, recieverId, message),
+  ]);
   if (conversation && newMessage) {
     conversation.messages.push(newMessage._id);
   }
