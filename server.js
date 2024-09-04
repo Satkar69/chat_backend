@@ -9,7 +9,7 @@ import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

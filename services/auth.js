@@ -28,7 +28,10 @@ export const loginUser = async ({ username, password }) => {
 };
 
 export const signupUser = async (userData) => {
-  const { password } = userData;
+  const { password, confirmPassword } = userData;
+  if (password !== confirmPassword) {
+    throw new CustomError("Passwords don't match", 400);
+  }
   userData.password = await hashPassword(password);
   userData.profilePic =
     userData.gender === "male"
