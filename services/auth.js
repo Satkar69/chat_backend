@@ -38,5 +38,11 @@ export const signupUser = async (userData) => {
       ? `https://avatar.iran.liara.run/public/boy?username=${userData.username}`
       : `https://avatar.iran.liara.run/public/girl?username=${userData.username}`;
   const user = await CHATDB.User.create(userData);
-  return user;
+  return {
+    _id: user._id,
+    fullname: user.fullname,
+    username: user.username,
+    gender: user.gender,
+    profilePic: user.profilePic,
+  };
 };

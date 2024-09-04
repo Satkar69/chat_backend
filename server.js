@@ -8,6 +8,7 @@ import db from "./models/index.js";
 import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import cors from "cors";
 
 const PORT = process.env.PORT || 5000;
 
@@ -33,6 +34,8 @@ global.CHATDB = db;
 app.use(express.json());
 
 app.use(cookieParser());
+
+app.use(cors("*"));
 
 app.use(morgan("dev"));
 
