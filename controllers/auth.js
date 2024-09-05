@@ -32,7 +32,7 @@ export const signup = asynchandler(async (req, res, next) => {
   res.status(201).cookie("token", token, options).json({
     status: "success",
     statusCode: 201,
-    user,
+    token,
   });
 });
 
