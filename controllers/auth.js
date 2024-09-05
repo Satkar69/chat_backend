@@ -1,4 +1,5 @@
 import { loginUser, signupUser } from "../services/auth.js";
+import { generateToken } from "../lib/token/jsonwebtoken.js";
 import asynchandler from "../utils/asyncHandler.js";
 
 export const login = asynchandler(async (req, res, next) => {
@@ -20,10 +21,18 @@ export const login = asynchandler(async (req, res, next) => {
 
 export const signup = asynchandler(async (req, res, next) => {
   const user = await signupUser(req.body);
-  res.status(201).json({
+  const token = await generateToken({ userId: user._id });
+  const options = {
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === "production") {
+    options.secure = true;
+  }
+  res.status(201).cookie("token", token, options).json({
     status: "success",
     statusCode: 201,
-    user,
+    token,
   });
 });
 

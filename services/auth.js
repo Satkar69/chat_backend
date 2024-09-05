@@ -28,12 +28,21 @@ export const loginUser = async ({ username, password }) => {
 };
 
 export const signupUser = async (userData) => {
-  const { password } = userData;
+  const { password, confirmPassword } = userData;
+  if (password !== confirmPassword) {
+    throw new CustomError("Passwords don't match", 400);
+  }
   userData.password = await hashPassword(password);
   userData.profilePic =
     userData.gender === "male"
       ? `https://avatar.iran.liara.run/public/boy?username=${userData.username}`
       : `https://avatar.iran.liara.run/public/girl?username=${userData.username}`;
   const user = await CHATDB.User.create(userData);
-  return user;
+  return {
+    _id: user._id,
+    fullname: user.fullname,
+    username: user.username,
+    gender: user.gender,
+    profilePic: user.profilePic,
+  };
 };
