@@ -5,7 +5,10 @@ import CustomError from "../utils/CustomError.js";
 export const authenticate = asynchandler(async (req, res, next) => {
   let token;
 
-  if (req.headers.authorization && req.headers.startsWith("Bearer")) {
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.token) {
     token = req.cookies.token;
