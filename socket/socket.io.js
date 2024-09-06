@@ -15,6 +15,10 @@ const io = new Server(server, {
 // the parameter in the callback 'socket' is going to be the user that is connected
 // socket has different properties, one being 'id' which is most commonly used
 
+export const getRecieverSocketId = (recieverId) => {
+  return userSocketMap[recieverId];
+};
+
 const userSocketMap = {};
 
 io.on("connection", (socket) => {
