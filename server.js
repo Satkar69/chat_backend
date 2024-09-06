@@ -9,11 +9,12 @@ import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
-import { socketApp } from "./lib/socket/socket.io.js";
+import { socketApp, server } from "./lib/socket/socket.io.js";
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+// update from app--> server after configuring socket server
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
