@@ -1,5 +1,4 @@
 import express from "express";
-const app = express();
 
 import CustomError from "./utils/CustomError.js";
 import globalErrorHandler from "./errors/index.js";
@@ -9,7 +8,7 @@ import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
-import { socketApp, server } from "./lib/socket/socket.io.js";
+import { app, server } from "./socket/socket.io.js";
 
 const PORT = process.env.PORT || 5000;
 
