@@ -1,5 +1,4 @@
 import express from "express";
-const app = express();
 
 import CustomError from "./utils/CustomError.js";
 import globalErrorHandler from "./errors/index.js";
@@ -9,10 +8,12 @@ import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
+import { app, server } from "./socket/socket.io.js";
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+// update from app--> server after configuring socket server
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 

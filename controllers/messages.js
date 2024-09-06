@@ -3,6 +3,7 @@ import {
   getConversationMessages,
 } from "../services/conversation.js";
 import { createMessage } from "../services/messages.js";
+import { getRecieverSocketId, io } from "../socket/socket.io.js";
 import asynchandler from "../utils/asyncHandler.js";
 
 export const sendMessage = asynchandler(async (req, res, next) => {
@@ -17,9 +18,15 @@ export const sendMessage = asynchandler(async (req, res, next) => {
     conversation.messages.push(newMessage._id);
   }
 
-  // socket.io functionality will go here
-
   await conversation.save();
+
+  // socket.io functionality
+  const recieverSocketId = getRecieverSocketId(recieverId);
+  if (recieverSocketId) {
+    // io.to(<socket_id>).emit() is used to send events to specific client with event name here 'newMessage'
+    io.to(recieverSocketId).emit("newMessage", newMessage);
+  }
+
   res.status(201).json({
     status: "success",
     statusCode: 201,

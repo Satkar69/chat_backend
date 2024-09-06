@@ -21,5 +21,10 @@ export const getConversationMessages = async (senderId, userToChatId) => {
   const conversation = await CHATDB.Conversation.findOne({
     participants: { $all: [senderId, userToChatId] },
   }).populate("messages");
+
+  if (!conversation) {
+    return [];
+  }
+
   return conversation.messages;
 };
