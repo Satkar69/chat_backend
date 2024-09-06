@@ -9,6 +9,7 @@ import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
+import { socketApp } from "./lib/socket/socket.io.js";
 
 const PORT = process.env.PORT || 5000;
 
