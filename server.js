@@ -38,7 +38,10 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://chat-frontend-seven-rho.vercel.app", // Frontend URL
+    origin: [
+      "http://localhost:3000",
+      "https://chat-frontend-seven-rho.vercel.app",
+    ], // Frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allow the methods you use
     credentials: true, // If you need cookies, tokens, etc.
   })
