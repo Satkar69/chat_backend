@@ -38,7 +38,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://sarkar-chat-app.onrender.com"], // Frontend URL
+    origin: ["http://localhost:3000", "https://satkar-chat-app.onrender.com"], // Frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allow the methods you use
     credentials: true, // If you need cookies, tokens, etc.
   })
